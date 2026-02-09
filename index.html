@@ -72,17 +72,24 @@
 
 		.hero {
 		  position: relative;
+		  font-size: clamp(1rem, 2vw, 1.4rem); /* scalabil și accesibil */
 		  width: 100%;
+		  padding: 0 20px; /* same horizontal inset as .card's padding */
+		  box-sizing: border-box;          
+          border-radius: 12px;
+          margin-bottom: 20px;
 		}
 
 		.hero img {
 		  width: 100%;
 		  display: block;
+		  border-radius: 12px; /* match .card corner radius */
+		  object-fit: cover;
 		}
 
 		.overlay {
 		  position: absolute;
-		  top: 30%;
+		  top: 40%;
 		  left: 50%;
 		  transform: translate(-50%, -50%);
 		  color: white;
@@ -90,6 +97,28 @@
 		  padding: 20px;
 		  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 		}
+
+        
+		.overlay p {
+		  /* Responsive paragraph size */
+		  font-size: clamp(1rem, 2.4vw, 1.1rem);
+		  margin-top: 8px;
+		}
+
+		/* Larger, bold paragraph variant inside .overlay */
+		.overlay p.big-bold {
+		  font-size: clamp(1.4rem, 4vw, 2rem);
+		  font-weight: 700;
+		  line-height: 1.1;
+		  margin: 0 0 6px 0;
+		}
+
+        /* New styles for Check‑in two-column layout */
+        .checkin {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
 
         /* New styles for Check‑in two-column layout */
         .checkin {
@@ -113,24 +142,101 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         }
 
-        .checkin-info {
-            flex: 1;
+        /* Thumbnails inside the checkin info (small, clickable) */
+        .checkin-info img.thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-left: 30px;
+            vertical-align: middle;
+            cursor: pointer;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
         }
 
-        /* Responsive: stack on small screens and make images horizontally scrollable */
-        @media (max-width: 699px) {
-            .checkin {
-                flex-direction: column;
+        @media (max-width: 480px) {
+            .checkin-info img.thumb { width: 60px; height: 45px; }
+        }
+
+        /* Simple modal / lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            font-size: 1.6rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Ensure the body doesn't scroll when lightbox is open */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* Lightbox nav button styles */
+.lightbox .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.35);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lightbox .prev { left: 18px; }
+.lightbox .next { right: 18px; }
+.lightbox .nav:focus, .lightbox .close:focus { outline: 2px solid rgba(255,255,255,0.6); }
+
+        /* Gallery thumbnails: make .thumb images smaller and grid-aligned */
+        .card.gallery {
+            padding-top: 8px;
+        }
+        .card.gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .card.gallery img.thumb {
+            width: 100%;
+            height: 120px; /* thumbnail height */
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        @media (min-width: 900px) {
+            .card.gallery {
+                grid-template-columns: repeat(4, 1fr);
             }
-            .checkin-images {
-                flex-direction: row;
-                overflow-x: auto;
+            .card.gallery img.thumb { height: 110px; }
+        }
+
+        @media (min-width: 700px) and (max-width: 899px) {
+            .card.gallery {
+                grid-template-columns: repeat(3, 1fr);
             }
-            .checkin-images img {
-                width: 120px;
-                margin-right: 8px;
-                margin-bottom: 0;
-            }
+        }
+
+        @media (max-width: 479px) {
+            .card.gallery img.thumb { height: 90px; }
         }
     </style>
 </head>
@@ -143,7 +249,7 @@
 	<header class="hero">
 	  <img src="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="">
 	  <div class="overlay">
-		<h1>Bun venit la Ola Studio, Brașov</h1>
+		<p class="big-bold">Bun venit la Ola Studio, Brașov</p>
 		<p>Toate informațiile necesare pentru un sejur de neuitat!</p>
 	  </div>
 	</header>
@@ -162,16 +268,15 @@
                 <ul class="info-list">
                     <li>Check‑in:  începând cu ora 15:00</li>
                     <li>Check‑out: până la ora 11:00</li>
-                    <li>Pentru acces, veti gasi chhelie la intrarea principala, in aceasta cutie:
-						<img src="./Ola Studio - Centrul Vechi_files/AXM09780.jpg" alt="Intrare">
-					</li>
+                    <li>Pentru acces, veti gasi cheile la intrarea principala, in cutia marcata in poza de mai jos:                        
+                    </li>
                     <li>Cod acces chei: <strong>îl veți primi în ziua sosirii!</strong></li>
+                    <li>Dupa intrarea in curtea principala, inaintati in culoar pana la aceasta usa, apoi urcati la etajul 2.
+                    </li>
+                    <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09780.jpg" data-full="./Ola Studio - Centrul Vechi_files/AXM09780.jpg" alt="Intrare">
+                    <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09773.jpg" data-full="./Ola Studio - Centrul Vechi_files/AXM09773.jpg" alt="Intrare">
+
                 </ul>
-            </div>
-                        <div class="checkin-images">
-                
-                <img src="./Ola Studio - Centrul Vechi_files/AXM09773.jpg" alt="Garsonieră">
-                <img src="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="Interior">
             </div>
         </div>
     </div>
@@ -179,16 +284,30 @@
     <div class="card">
         <h2>🏡 Facilități</h2>
         <ul class="info-list">
-            <li>Wi‑Fi: <strong>NumeWiFi</strong> | Parolă: <strong>Parola123</strong></li>
+            <li>Wi‑Fi: 
             <li>Aer condiționat</li>
             <li>Bucătărie complet utilată</li>
             <li>Netflix / Smart TV</li>
+            <li>Masina de spalat haine</li>
+            <li>Fier de calcat</li>
         </ul>
     </div>
 	
 	<div class="card gallery">
-        <img src="./Ola Studio - Centrul Vechi_files/AXM09706.jpg" alt="Garsonieră">
-        <img src="./Ola Studio - Centrul Vechi_files/AXM09752.jpg" alt="Garsonieră">
+        <h2>🖼️ Galerie foto</h2>
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09445.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09409.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09610.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09518.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09752.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09654.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09660.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09676.jpg" alt="Garsonieră">
+
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09760.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09763.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09489.jpg" alt="Garsonieră">
+        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09501.jpg" alt="Garsonieră">
     </div>
 
     <div class="card map">
@@ -198,8 +317,8 @@
 
     <div class="card">
         <h2>📞 Contact</h2>
-        <p>Telefon: 07xx xxx xxx</p>
-        <p>Email: exemplu@email.com</p>
+        <p>Pentru orice nelamuriri va stau la dispozitie:</p>
+        <p>Telefon: 0762286147</p>
     </div>
 
 </div>
@@ -208,5 +327,84 @@
     © 2026 Garsoniera Brașov – Toate drepturile rezervate
 </footer>
 
+<!-- Lightbox modal -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="close" id="lightboxClose" aria-label="Închide">×</button>
+    <button class="nav prev" id="lightboxPrev" aria-label="Imagine anterioară">‹</button>
+    <button class="nav next" id="lightboxNext" aria-label="Imagine următoare">›</button>
+    <img id="lightboxImg" src="" alt="Imagine mare">
+</div>
 
+<script>
+// Enhanced lightbox: binds to all img.thumb and supports next/prev navigation scoped to a container
+(function(){
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const closeBtn = document.getElementById('lightboxClose');
+  const prevBtn = document.getElementById('lightboxPrev');
+  const nextBtn = document.getElementById('lightboxNext');
+
+  // All thumbnails on the page
+  const allThumbs = Array.from(document.querySelectorAll('img.thumb'));
+
+  // State for the currently opened group
+  let groupThumbs = [];
+  let currentIndex = -1;
+
+  function openIndex(i) {
+    if (i < 0 || i >= groupThumbs.length) return;
+    currentIndex = i;
+    const el = groupThumbs[i];
+    const src = el.dataset.full || el.src;
+    lightboxImg.src = src;
+    lightboxImg.alt = el.alt || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.classList.add('no-scroll');
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden','true');
+    lightboxImg.src = '';
+    document.body.classList.remove('no-scroll');
+    currentIndex = -1;
+    groupThumbs = [];
+  }
+
+  function showNext() { if (groupThumbs.length === 0) return; openIndex((currentIndex + 1) % groupThumbs.length); }
+  function showPrev() { if (groupThumbs.length === 0) return; openIndex((currentIndex - 1 + groupThumbs.length) % groupThumbs.length); }
+
+  // Helper: find the logical group container for a thumbnail
+  function findGroupContainer(el) {
+    return el.closest('.gallery') || el.closest('.checkin') || el.closest('.checkin-images') || document;
+  }
+
+  // Attach click on every thumbnail; when clicked, build the group from its container
+  allThumbs.forEach((img) => {
+    img.addEventListener('click', (e) => {
+      const container = findGroupContainer(img);
+      groupThumbs = Array.from(container.querySelectorAll('img.thumb'));
+      const idx = groupThumbs.indexOf(img);
+      openIndex(idx >= 0 ? idx : 0);
+    });
+  });
+
+  // Controls
+  closeBtn.addEventListener('click', close);
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+  // Click outside image closes
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!document.body.classList.contains('no-scroll')) return; // only when open
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+})();
+</script>
 </body></html>
