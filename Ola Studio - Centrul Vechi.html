@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)file:///C:/Users/Ana-Roxana/Desktop/OlaStudio/Ola%20Studio%20-%20Centrul%20Vechi.html -->
+<html lang="ro"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ola Studio - Centrul Vechi</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #000000;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .info-list li {
+            margin-bottom: 8px;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 250px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        @media (min-width: 700px) {
+            .gallery {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+		.hero {
+		  position: relative;
+		  width: 100%;
+		}
+
+		.hero img {
+		  width: 100%;
+		  display: block;
+		}
+
+		.overlay {
+		  position: absolute;
+		  top: 30%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  color: white;
+		  text-align: center;
+		  padding: 20px;
+		  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+		}
+
+        /* New styles for Check‑in two-column layout */
+        .checkin {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .checkin-images {
+            flex: 0 0 140px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .checkin-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            object-fit: cover;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .checkin-info {
+            flex: 1;
+        }
+
+        /* Responsive: stack on small screens and make images horizontally scrollable */
+        @media (max-width: 699px) {
+            .checkin {
+                flex-direction: column;
+            }
+            .checkin-images {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+            .checkin-images img {
+                width: 120px;
+                margin-right: 8px;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div class="container">
+
+	<header class="hero">
+	  <img src="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="">
+	  <div class="overlay">
+		<h1>Bun venit la Ola Studio, Brașov</h1>
+		<p>Toate informațiile necesare pentru un sejur de neuitat!</p>
+	  </div>
+	</header>
+
+
+
+    <div class="card">
+        <h2>📍 Adresă</h2>
+        <p>Str. Nicolae Balcescu, nr. 49, Brașov</p>
+    </div>
+
+    <div class="card">
+        <h2>🔑 Informatii Check‑in</h2>
+        <div class="checkin">
+            <div class="checkin-info">
+                <ul class="info-list">
+                    <li>Check‑in:  începând cu ora 15:00</li>
+                    <li>Check‑out: până la ora 11:00</li>
+                    <li>Pentru acces, veti gasi chhelie la intrarea principala, in aceasta cutie:
+						<img src="./Ola Studio - Centrul Vechi_files/AXM09780.jpg" alt="Intrare">
+					</li>
+                    <li>Cod acces chei: <strong>îl veți primi în ziua sosirii!</strong></li>
+                </ul>
+            </div>
+                        <div class="checkin-images">
+                
+                <img src="./Ola Studio - Centrul Vechi_files/AXM09773.jpg" alt="Garsonieră">
+                <img src="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="Interior">
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🏡 Facilități</h2>
+        <ul class="info-list">
+            <li>Wi‑Fi: <strong>NumeWiFi</strong> | Parolă: <strong>Parola123</strong></li>
+            <li>Aer condiționat</li>
+            <li>Bucătărie complet utilată</li>
+            <li>Netflix / Smart TV</li>
+        </ul>
+    </div>
+	
+	<div class="card gallery">
+        <img src="./Ola Studio - Centrul Vechi_files/AXM09706.jpg" alt="Garsonieră">
+        <img src="./Ola Studio - Centrul Vechi_files/AXM09752.jpg" alt="Garsonieră">
+    </div>
+
+    <div class="card map">
+        <h2>🗺️ Hartă</h2>
+        <iframe src="./Ola Studio - Centrul Vechi_files/embed.html"></iframe>
+    </div>
+
+    <div class="card">
+        <h2>📞 Contact</h2>
+        <p>Telefon: 07xx xxx xxx</p>
+        <p>Email: exemplu@email.com</p>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Garsoniera Brașov – Toate drepturile rezervate
+</footer>
+
+
+</body></html>
