@@ -74,7 +74,7 @@
 		  position: relative;
 		  font-size: clamp(1rem, 2vw, 1.4rem); /* scalabil și accesibil */
 		  width: 100%;
-		  padding: 0 20px; /* same horizontal inset as .card's padding */
+		  padding: 0 0px; /* same horizontal inset as .card's padding */
 		  box-sizing: border-box;          
           border-radius: 12px;
           margin-bottom: 20px;
@@ -89,7 +89,7 @@
 
 		.overlay {
 		  position: absolute;
-		  top: 40%;
+		  top: 35%;
 		  left: 50%;
 		  transform: translate(-50%, -50%);
 		  color: white;
@@ -120,13 +120,6 @@
             align-items: flex-start;
         }
 
-        /* New styles for Check‑in two-column layout */
-        .checkin {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
         .checkin-images {
             flex: 0 0 140px;
             display: flex;
@@ -144,14 +137,14 @@
 
         /* Thumbnails inside the checkin info (small, clickable) */
         .checkin-info img.thumb {
-            width: 80px;
+            /* width: 80px;
             height: 80px;
             object-fit: cover;
             border-radius: 6px;
-            margin-left: 30px;
+            margin-left: 30px; */
             vertical-align: middle;
             cursor: pointer;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+            /* box-shadow: 0 1px 4px rgba(0,0,0,0.12); */
         }
 
         @media (max-width: 480px) {
@@ -189,21 +182,21 @@
         }
 
         /* Lightbox nav button styles */
-.lightbox .nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.35);
-  color: white;
-  border: none;
-  font-size: 2rem;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.lightbox .prev { left: 18px; }
-.lightbox .next { right: 18px; }
-.lightbox .nav:focus, .lightbox .close:focus { outline: 2px solid rgba(255,255,255,0.6); }
+        .lightbox .nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.35);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .lightbox .prev { left: 18px; }
+        .lightbox .next { right: 18px; }
+        .lightbox .nav:focus, .lightbox .close:focus { outline: 2px solid rgba(255,255,255,0.6); }
 
         /* Gallery thumbnails: make .thumb images smaller and grid-aligned */
         .card.gallery {
@@ -238,6 +231,31 @@
         @media (max-width: 479px) {
             .card.gallery img.thumb { height: 90px; }
         }
+
+        /* Checkin steps layout (thumbnails with captions) */
+        .checkin-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            align-items: start;
+            padding: 45px;
+        }
+        .checkin-steps .step img.thumb {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+        }
+        .checkin-steps .step .caption {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: var(--muted, #69707a);
+            line-height: 1.3;
+        }
+        @media (max-width: 520px) {
+            .checkin-steps .step img.thumb { height: 100px; }
+        }
     </style>
 </head>
 <body>
@@ -250,7 +268,6 @@
 	  <img src="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="">
 	  <div class="overlay">
 		<p class="big-bold">Bun venit la Ola Studio, Brașov</p>
-		<p>Toate informațiile necesare pentru un sejur de neuitat!</p>
 	  </div>
 	</header>
 
@@ -265,21 +282,31 @@
         <h2>🔑 Informatii Check‑in</h2>
         <div class="checkin">
             <div class="checkin-info">
-                <ul class="info-list">
-                    <li>Check‑in:  începând cu ora 15:00</li>
-                    <li>Check‑out: până la ora 11:00</li>
-                    <li>Pentru acces, veti gasi cheile la intrarea principala, in cutia marcata in poza de mai jos:                        
-                    </li>
-                    <li>Cod acces chei: <strong>îl veți primi în ziua sosirii!</strong></li>
-                    <li>Dupa intrarea in curtea principala, inaintati in culoar pana la aceasta usa, apoi urcati la etajul 2.
-                    </li>
-                    <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09780.jpg" data-full="./Ola Studio - Centrul Vechi_files/AXM09780.jpg" alt="Intrare">
-                    <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09773.jpg" data-full="./Ola Studio - Centrul Vechi_files/AXM09773.jpg" alt="Intrare">
+                <li>Check-in: incepand cu ora 15:00</li>
+                <li>Check-out: pana la ora 11:00</li>
 
-                </ul>
-            </div>
-        </div>
-    </div>
+                <div class="checkin-steps">
+                    <div class="step">
+                        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/1.jpg" data-full="./Ola Studio - Centrul Vechi_files/AXM09780.jpg" alt="Cutia de chei">
+                        <p class="caption">Aceasta este intrarea principala.</p>
+                    </div>
+                    <div class="step">
+                        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/2.jpeg" data-full="./Ola Studio - Centrul Vechi_files/AXM09773.jpg" alt="Ușa și culoarul">
+                        <p class="caption">In aceasta cutie veti gasi cheile de acces. <strong>Codul de deblocare o sa il primiti in ziua sosirii.</strong> </p>
+                    </div>
+                    <div class="step">
+                        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/3.jpeg" data-full="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="Interior">
+                        <p class="caption">Pentru accesul in curte apropiati tag-ul albastru de la chei de zona marcata de pe interfon.</p>
+                    </div>
+                    <div class="step">
+                        <img class="thumb" src="./Ola Studio - Centrul Vechi_files/4.jpg" data-full="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="Interior">
+                        <p class="caption">După intrarea in curte,continuați pe culoar pana la a doua intrare la dreapta. Locațiea este la etajul 2, Ap.10.</p>
+                    </div>
+                </div>
+                <li>In ziua plecarii va rugam sa lasati cheile in cutia din care le-ati luat la check-in!</li>
+             </div>
+         </div>
+     </div>
 
     <div class="card">
         <h2>🏡 Facilități</h2>
