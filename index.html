@@ -137,14 +137,8 @@
 
         /* Thumbnails inside the checkin info (small, clickable) */
         .checkin-info img.thumb {
-            /* width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-left: 30px; */
             vertical-align: middle;
             cursor: pointer;
-            /* box-shadow: 0 1px 4px rgba(0,0,0,0.12); */
         }
 
         @media (max-width: 480px) {
@@ -255,7 +249,7 @@
             line-height: 1.3;
         }
         @media (max-width: 520px) {
-            .checkin-steps .step img.thumb { height: 180px; }
+            .checkin-steps .step img.thumb { height: 140px; }
         }
 
         /* Small thumbnails specifically for the Rules card */
@@ -268,93 +262,159 @@
         }
         .card.rules .step { margin-top: 10px; }
         .card.rules .caption { margin: 6px 0 0 0; font-size: 0.95rem; color: var(--muted, #69707a); }
+
+        /* Language modal */
+        #langModal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35); /* slightly lighter overlay */
+            z-index: 2000;
+            -webkit-font-smoothing:antialiased;
+        }
+        #langModal .box {
+            background: white;
+            padding: 14px 16px; /* more compact */
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+            max-width: 320px;
+            width: auto;
+            text-align: center;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+        }
+        #langModal h3 { margin: 0; font-size: 0.98rem; font-weight:700; }
+        #langModal .lang-btn { margin: 0 6px; padding: 8px 12px; border-radius: 999px; border: 1px solid #e6e6e6; cursor: pointer; background: transparent; font-weight:700; font-size:0.92rem; transition: transform .12s ease, box-shadow .12s ease; }
+        #langModal .lang-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(62, 31, 3, 0.06); }
+        #langModal .lang-btn.primary { background: #92711d; color: white; border-color: #443508; }
+        #langModal p { font-size:0.78rem; margin:0 0 0 0; color:#666 }
+
+        /* Top-corner language switcher - compact */
+        #langSwitch {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 2100;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            background: rgba(193, 137, 77, 0.9);
+            padding: 4px;
+            border-radius: 999px;
+            box-shadow: 0 6px 18px rgba(189, 118, 20, 0.06);
+            border: 1px solid rgba(0,0,0,0.06);
+            backdrop-filter: blur(4px);
+        }
+        #langSwitch .lang-btn { padding: 6px 8px; font-weight:700; font-size:0.85rem; border-radius:999px; background: transparent; border: none; }
+        #langSwitch .lang-btn:hover { background: rgba(202, 122, 23, 0.06); }
+        #langSwitch .lang-btn.active, #langSwitch .lang-btn.primary { background: #a96b42; color: white; }
     </style>
 </head>
 <body>
 
 
 
+<div id="langModal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="langTitle">
+        <h3 id="langTitle">Choose language / Alege limba</h3>
+        <div>
+            <button class="lang-btn" data-lang="ro">Română</button>
+            <button class="lang-btn primary" data-lang="en">English</button>
+        </div>
+        <p style="font-size:.9rem;margin-top:12px;color:#555">You can change language later from the page.</p>
+    </div>
+</div>
+
+<div id="langSwitch" aria-hidden="true">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+</div>
+
 <div class="container">
 
 	<header class="hero">
 	  <img src="./Ola Studio - Centrul Vechi_files/AXM09740.jpg" alt="">
 	  <div class="overlay">
-		<p class="big-bold">Bun venit la Ola Studio, Brașov</p>
+		<p class="big-bold" data-i18n="title">Bun venit la Ola Studio, Brașov</p>
 	  </div>
 	</header>
 
 
 
     <div class="card">
-        <h2>📍 Adresă</h2>
-        <p>Str. Nicolae Balcescu, nr. 49, Brașov</p>
+        <h2 data-i18n="addr_h2">📍 Adresă</h2>
+        <p data-i18n="address_text">Str. Nicolae Balcescu, nr. 49, Brașov</p>
     </div>
 
     <div class="card">
-        <h2>🔑 Informatii Check‑in</h2>
+        <h2 data-i18n="checkin_h2">🔑 Informatii Check‑in</h2>
         <div class="checkin">
             <div class="checkin-info">
-                <li>Check-in: incepand cu ora 15:00</li>
-                <li>Check-out: pana la ora 11:00</li>
+                <li data-i18n="checkin_li1">Check-in: incepand cu ora 15:00</li>
+                <li data-i18n="checkin_li2">Check-out: pana la ora 11:00</li>
 
                 <div class="checkin-steps">
                     <div class="step">
                         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/1.jpg" data-full="./Ola Studio - Centrul Vechi_files/1.jpg" alt="Cutia de chei">
-                        <p class="caption">Aceasta este intrarea principala.</p>
+                        <p class="caption" data-i18n="step1">Aceasta este intrarea principala.</p>
                     </div>
                     <div class="step">
                         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/2.jpeg" data-full="./Ola Studio - Centrul Vechi_files/2.jpeg" alt="Ușa și culoarul">
-                        <p class="caption">In aceasta cutie veti gasi cheile de acces. <strong>Codul de deblocare o sa il primiti in ziua sosirii.</strong> </p>
+                        <p class="caption" data-i18n="step2">In aceasta cutie veti gasi cheile de acces. <strong>Codul de deblocare o sa il primiti in ziua sosirii.</strong> </p>
                     </div>
                     <div class="step">
                         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/3.jpeg" data-full="./Ola Studio - Centrul Vechi_files/3.jpeg" alt="Interior">
-                        <p class="caption">Pentru accesul in curte apropiati tag-ul albastru de la chei de zona marcata de pe interfon.</p>
+                        <p class="caption" data-i18n="step3">Pentru accesul in curte apropiati tag-ul albastru de la chei de zona marcata de pe interfon.</p>
                     </div>
                     <div class="step">
                         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/4.jpg" data-full="./Ola Studio - Centrul Vechi_files/4.jpg" alt="Interior">
-                        <p class="caption">După intrarea in curte,continuați pe culoar pana la a doua intrare la dreapta. Locațiea este la etajul 2, Ap.10.</p>
+                        <p class="caption" data-i18n="step4">După intrarea in curte,continuați pe culoar pana la a doua intrare la dreapta. Locațiea este la etajul 2, Ap.10.</p>
                     </div>
                 </div>
-                <li>In ziua plecarii va rugam sa lasati cheile in cutia din care le-ati luat la check-in!</li>
+                <li data-i18n="checkin_leave">In ziua plecarii va rugam sa lasati cheile in cutia din care le-ati luat la check-in!</li>
              </div>
          </div>
      </div>
      <div class ="card rules">
-         <h2>🛎️ Regulile casei</h2>
+         <h2 data-i18n="rules_h2">🛎️ Regulile casei</h2>
          <ul class="info-list">
-             <li>Fumatul este interzis în interior.</li>
-             <li>Animalele de companie nu sunt permise.</li>
-             <li>Vă rugăm să respectați liniștea după ora 22:00.</li>
-             <li>Nu sunt permise petrecerile sau evenimentele.</li>
-             <li>Va rugam sa nu lasati electrocasnicele in functiune atunci cand parasiti apartamentul.</li>
-             <li>Va rugam sa pastrati curatenia pe durata sederii si sa nu puneti vasele murdare in dulap.</li>
-             <li>Ajustarea temperaturii:</li>
+             <li data-i18n="rule1">Fumatul este interzis în interior.</li>
+             <li data-i18n="rule2">Animalele de companie nu sunt permise.</li>
+             <li data-i18n="rule3">Vă rugăm să respectați liniștea după ora 22:00.</li>
+             <li data-i18n="rule4">Nu sunt permise petrecerile sau evenimentele.</li>
+             <li data-i18n="rule5">Va rugam sa nu lasati electrocasnicele in functiune atunci cand parasiti apartamentul.</li>
+             <li data-i18n="rule6">Va rugam sa pastrati curatenia pe durata sederii si sa nu puneti vasele murdare in dulap.</li>
+             <li data-i18n="rule7">Ajustarea temperaturii:</li>
             <div class="step">
                 <img class="thumb" src="./Ola Studio - Centrul Vechi_files/6.jpeg" data-full="./Ola Studio - Centrul Vechi_files/6.jpeg" alt="Aparat de aer condiționat">
-                <p class="caption">Pentru ajustarea temperaturii in sezonul cald se va folosi aerul conditionat.</p>
+                <p class="caption" data-i18n="rule_caption_ac">Pentru ajustarea temperaturii in sezonul cald se va folosi aerul conditionat.</p>
             </div>
             <div class="step">
                 <img class="thumb" src="./Ola Studio - Centrul Vechi_files/5.jpeg" data-full="./Ola Studio - Centrul Vechi_files/5.jpeg" alt="Centrala">
-                <p class="caption">In sezonul rece se va folosi termostatul centralei. Apasand butonul "+" veti creste temperatura pana la valoarea dorita urmand ca centrala sa se opreasca cand atingeti temperatura dorita.</p>
+                <p class="caption" data-i18n="rule_caption_heat">In sezonul rece se va folosi termostatul centralei. Apasand butonul "+" veti creste temperatura pana la valoarea dorita urmand ca centrala sa se opreasca cand atingeti temperatura dorita.</p>
             </div>
          </ul>
      </div>
 
     <div class="card">
-        <h2>🏡 Facilități</h2>
+        <h2 data-i18n="fac_h2">🏡 Facilități</h2>
         <ul class="info-list">
-            <li>Wi‑Fi: 
-            <li>Aer condiționat</li>
-            <li>Bucătărie complet utilată</li>
-            <li>Smart TV</li>
-            <li>Masina de spalat haine</li>
-            <li>Fier de calcat</li>
-            <li>BONUS: Din partea casei aveti acces gratuit la platforma Netflix. </li>
+            <li data-i18n="wifi">Wi‑Fi</li>
+            <li data-i18n="fac_ac">Aer condiționat</li>
+            <li data-i18n="fac_kitchen">Bucătărie complet utilată</li>
+            <li data-i18n="fac_tv">Smart TV</li>
+            <li data-i18n="fac_washer">Masina de spalat haine</li>
+            <li data-i18n="fac_iron">Fier de calcat</li>
+            <li data-i18n="fac_bonus">BONUS: Din partea casei aveti acces gratuit la platforma Netflix.</li>
         </ul>
     </div>
 	
 	<div class="card gallery">
-        <h2>🖼️ Galerie foto</h2>
+        <h2 data-i18n="gallery_h2">🖼️ Galerie foto</h2>
         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09445.jpg" alt="Garsonieră">
         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09409.jpg" alt="Garsonieră">
         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/AXM09610.jpg" alt="Garsonieră">
@@ -371,14 +431,14 @@
     </div>
 
     <div class="card map">
-        <h2>🗺️ Hartă</h2>
-        <iframe src="./Ola Studio - Centrul Vechi_files/embed.html"></iframe>
+        <h2 data-i18n="map_h2">🗺️ Hartă</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.4003834139303!2d25.5952693!3d45.642780699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35b7e639dfb59%3A0x6c0f545b39833d05!2sOla%20Studio%20-%20Centru%20Vechi!5e0!3m2!1sro!2sro!4v1771880425840!5m2!1sro!2sro" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <div class="card">
-        <h2>📞 Contact</h2>
-        <p>Pentru orice nelamuriri va stau la dispozitie:</p>
-        <p>Telefon: 0762286147</p>
+        <h2 data-i18n="contact_h2">📞 Contact</h2>
+        <p data-i18n="contact_text">Pentru orice nelamuriri va stau la dispozitie:</p>
+        <p data-i18n="contact_phone">Telefon: 0762286147</p>
     </div>
 
 </div>
@@ -396,7 +456,7 @@
 </div>
 
 <script>
-// Enhanced lightbox: binds to all img.thumb and supports next/prev navigation scoped to a container
+// Enhanced lightbox remains unchanged — it binds to .thumb images and groups by container
 (function(){
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
@@ -404,10 +464,7 @@
   const prevBtn = document.getElementById('lightboxPrev');
   const nextBtn = document.getElementById('lightboxNext');
 
-  // All thumbnails on the page
   const allThumbs = Array.from(document.querySelectorAll('img.thumb'));
-
-  // State for the currently opened group
   let groupThumbs = [];
   let currentIndex = -1;
 
@@ -435,12 +492,10 @@
   function showNext() { if (groupThumbs.length === 0) return; openIndex((currentIndex + 1) % groupThumbs.length); }
   function showPrev() { if (groupThumbs.length === 0) return; openIndex((currentIndex - 1 + groupThumbs.length) % groupThumbs.length); }
 
-  // Helper: find the logical group container for a thumbnail
   function findGroupContainer(el) {
     return el.closest('.gallery') || el.closest('.checkin') || el.closest('.checkin-images') || el.closest('.rules') || document;
   }
 
-  // Attach click on every thumbnail; when clicked, build the group from its container
   allThumbs.forEach((img) => {
     img.addEventListener('click', (e) => {
       const container = findGroupContainer(img);
@@ -450,21 +505,155 @@
     });
   });
 
-  // Controls
   closeBtn.addEventListener('click', close);
   nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
   prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
 
-  // Click outside image closes
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
 
-  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    if (!document.body.classList.contains('no-scroll')) return; // only when open
+    if (!document.body.classList.contains('no-scroll')) return;
     if (e.key === 'Escape') close();
     if (e.key === 'ArrowRight') showNext();
     if (e.key === 'ArrowLeft') showPrev();
   });
+})();
+
+// Language selection & simple i18n
+(function(){
+  const modal = document.getElementById('langModal');
+  const buttons = Array.from(modal.querySelectorAll('.lang-btn'));
+  const STORAGE_KEY = 'ola_lang';
+
+  const strings = {
+    ro: {
+      title: 'Bun venit la Ola Studio, Brașov',
+      addr_h2: '📍 Adresă',
+      address_text: 'Str. Nicolae Balcescu, nr. 49, Brașov',
+      checkin_h2: '🔑 Informatii Check‑in',
+      checkin_li1: 'Check‑in: începând cu ora 15:00',
+      checkin_li2: 'Check‑out: până la ora 11:00',
+      step1: 'Aceasta este intrarea principala.',
+      step2: 'În această cutie veți gasi cheile de acces. Codul de deblocare îl veți primi în ziua sosirii.',
+      step3: 'Pentru accesul în curte apropiați tag-ul albastru de la chei de zona marcată pe interfon.',
+      step4: 'După intrarea în curte, continuați pe culoar până la a doua intrare la dreapta. Locația este la etajul 2, Ap.10.',
+      checkin_leave: 'În ziua plecării vă rugăm să lăsați cheile în cutia din care le-ați luat la check-in!',
+      rules_h2: '🛎️ Regulile casei',
+      rule1: 'Fumatul este interzis în interior.',
+      rule2: 'Animalele de companie nu sunt permise.',
+      rule3: 'Vă rugăm să respectați liniștea după ora 22:00.',
+      rule4: 'Nu sunt permise petrecerile sau evenimentele.',
+      rule5: 'Vă rugăm să nu lăsați electrocasnicele în funcțiune atunci când părăsiți apartamentul.',
+      rule6: 'Vă rugăm să păstrați curățenia pe durata șederii și să nu puneți vasele murdare în dulap.',
+      rule7: 'Ajustarea temperaturii:',
+      rule_caption_ac: 'Pentru ajustarea temperaturii în sezonul cald se va folosi aerul condiționat.',
+      rule_caption_heat: 'În sezonul rece se va folosi termostatul centralei. Apăsând butonul "+" veți crește temperatura până la valoarea dorită; centrala se va opri când se atinge temperatura setată.',
+      fac_h2: '🏡 Facilități',
+      wifi: 'Wi‑Fi',
+      fac_ac: 'Aer condiționat',
+      fac_kitchen: 'Bucătărie complet utilată',
+      fac_tv: 'Smart TV',
+      fac_washer: 'Mașină de spălat rufe',
+      fac_iron: 'Fier de călcat',
+      fac_bonus: 'BONUS: Din partea casei aveți acces gratuit la platforma Netflix.',
+      gallery_h2: '🖼️ Galerie foto',
+      map_h2: '🗺️ Hartă',
+      contact_h2: '📞 Contact',
+      contact_text: 'Pentru orice nelămuriri vă stau la dispoziție:',
+      contact_phone: 'Telefon: 0762286147'
+    },
+    en: {
+      title: 'Welcome to Ola Studio, Brașov',
+      addr_h2: '📍 Address',
+      address_text: 'Str. Nicolae Balcescu, no. 49, Brașov',
+      checkin_h2: '🔑 Check‑in Information',
+      checkin_li1: 'Check‑in: from 3:00 PM',
+      checkin_li2: 'Check‑out: until 11:00 AM',
+      step1: 'This is the main entrance.',
+      step2: 'You will find the keys in this box. The access code will be sent on the day of arrival.',
+      step3: 'To access the courtyard, hold the blue key tag close to the marked intercom area.',
+      step4: 'After entering the courtyard, follow the corridor to the second doorway on the right. The apartment is on 2nd floor, Apt.10.',
+      checkin_leave: 'On departure day please leave the keys in the same box you used at check-in.',
+      rules_h2: '🛎️ House rules',
+      rule1: 'No smoking inside the property.',
+      rule2: 'Pets are not allowed.',
+      rule3: 'Please respect quiet hours after 10:00 PM.',
+      rule4: 'Parties or events are not permitted.',
+      rule5: 'Please do not leave appliances running when you leave the apartment.',
+      rule6: 'Please keep the apartment tidy during your stay and do not place dirty dishes in the cupboard.',
+      rule7: 'Temperature adjustment:',
+      rule_caption_ac: 'For cooling in hot season please use the air conditioning.',
+      rule_caption_heat: 'In the cold season use the central heating thermostat. Press the "+" button to raise the temperature to the desired level; the boiler will stop when the set temperature is reached.',
+      fac_h2: '🏡 Facilities',
+      wifi: 'Wi‑Fi',
+      fac_ac: 'Air conditioning',
+      fac_kitchen: 'Fully equipped kitchen',
+      fac_tv: 'Smart TV',
+      fac_washer: 'Washing machine',
+      fac_iron: 'Iron',
+      fac_bonus: 'BONUS: Complimentary access to Netflix is provided.',
+      gallery_h2: '🖼️ Photo gallery',
+      map_h2: '🗺️ Map',
+      contact_h2: '📞 Contact',
+      contact_text: 'For any questions I am available:',
+      contact_phone: 'Phone: 0762286147'
+    }
+  };
+
+  function translate(lang) {
+    const dict = strings[lang] || strings.ro;
+    Object.keys(dict).forEach(key => {
+      const el = document.querySelector('[data-i18n="'+key+'"]');
+      if (el) el.innerHTML = dict[key];
+    });
+  }
+
+  function setLang(lang) {
+    localStorage.setItem(STORAGE_KEY, lang);
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden','true');
+    translate(lang);
+    // reveal and update top switch
+    const langSwitchEl = document.getElementById('langSwitch');
+    if (langSwitchEl) {
+      langSwitchEl.setAttribute('aria-hidden','false');
+      const switchButtons = Array.from(langSwitchEl.querySelectorAll('.lang-btn'));
+      switchButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    }
+  }
+
+  // Initialize
+  const saved = localStorage.getItem(STORAGE_KEY);
+  const langSwitchEl = document.getElementById('langSwitch');
+  const switchButtons = langSwitchEl ? Array.from(langSwitchEl.querySelectorAll('.lang-btn')) : [];
+
+  if (saved) {
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden','true');
+    translate(saved);
+    if (langSwitchEl) {
+      langSwitchEl.setAttribute('aria-hidden','false');
+      switchButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === saved));
+    }
+  } else {
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden','false');
+    if (langSwitchEl) langSwitchEl.setAttribute('aria-hidden','true');
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', () => setLang(btn.dataset.lang)));
+
+  // Language switcher in top corner
+  if (langSwitchEl) {
+    switchButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        setLang(lang);
+        // active state handled in setLang
+      });
+    });
+  }
+
 })();
 </script>
 </body></html>
