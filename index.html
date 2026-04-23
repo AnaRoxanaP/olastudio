@@ -308,9 +308,13 @@
             border: 1px solid rgba(0,0,0,0.06);
             backdrop-filter: blur(4px);
         }
-        #langSwitch .lang-btn { padding: 6px 8px; font-weight:700; font-size:0.85rem; border-radius:999px; background: transparent; border: none; -webkit-appearance: none; appearance: none; -moz-appearance: none; -webkit-tap-highlight-color: transparent; color: inherit; }
-        #langSwitch .lang-btn:hover { background: rgba(202, 122, 23, 0.06); }
-        #langSwitch .lang-btn.active, #langSwitch .lang-btn.primary { background: #a96b42; color: white; }
+        #langSwitch .lang-btn { padding: 6px 8px; font-weight:700; font-size:0.85rem; border-radius:999px; background: transparent; border: none; -webkit-appearance: none; appearance: none; -moz-appearance: none; -webkit-tap-highlight-color: transparent; color: #6b4a2b; -webkit-text-fill-color: #6b4a2b; text-decoration: none; }
+        #langSwitch .lang-btn:hover { background: rgba(202, 122, 23, 0.06); color: #4e3725; -webkit-text-fill-color: #4e3725; }
+        #langSwitch .lang-btn.active, #langSwitch .lang-btn.primary { background: #a96b42; color: #ffffff; -webkit-text-fill-color: #ffffff; }
+        @media (max-width: 520px) {
+            /* ensure mobile enforces the brown text color */
+            #langSwitch .lang-btn { color: #6b4a2b; -webkit-text-fill-color: #6b4a2b; }
+        }
     </style>
 </head>
 <body>
