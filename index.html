@@ -288,10 +288,9 @@
             justify-content: center;
         }
         #langModal h3 { margin: 0; font-size: 0.98rem; font-weight:700; }
-        #langModal .lang-btn { margin: 0 6px; padding: 8px 12px; border-radius: 999px; border: 1px solid #fffefe; cursor: pointer; background: transparent; font-weight:700; font-size:0.92rem; transition: transform .12s ease, box-shadow .12s ease; }
+        #langModal .lang-btn { margin: 0 6px; padding: 8px 12px; border-radius: 999px; border: 1px solid #fffefe; cursor: pointer; background: transparent; font-weight:700; font-size:0.92rem; transition: transform .12s ease, box-shadow .12s ease; -webkit-appearance: none; appearance: none; -moz-appearance: none; -webkit-tap-highlight-color: transparent; }
         #langModal .lang-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(62, 31, 3, 0.06); }
         #langModal .lang-btn.primary { background: #92711d; color: white; border-color: #443508; }
-        #langModal p { font-size:0.78rem; margin:0 0 0 0; color:#161616 }
 
         /* Top-corner language switcher - compact */
         #langSwitch {
@@ -309,7 +308,7 @@
             border: 1px solid rgba(0,0,0,0.06);
             backdrop-filter: blur(4px);
         }
-        #langSwitch .lang-btn { padding: 6px 8px; font-weight:700; font-size:0.85rem; border-radius:999px; background: transparent; border: none; }
+        #langSwitch .lang-btn { padding: 6px 8px; font-weight:700; font-size:0.85rem; border-radius:999px; background: transparent; border: none; -webkit-appearance: none; appearance: none; -moz-appearance: none; -webkit-tap-highlight-color: transparent; color: inherit; }
         #langSwitch .lang-btn:hover { background: rgba(202, 122, 23, 0.06); }
         #langSwitch .lang-btn.active, #langSwitch .lang-btn.primary { background: #a96b42; color: white; }
     </style>
@@ -376,7 +375,7 @@
                     </div>
                     <div class="step">
                         <img class="thumb" src="./Ola Studio - Centrul Vechi_files/4_1.jpeg" data-full="./Ola Studio - Centrul Vechi_files/4_1.jpeg" alt="Interior">
-                        <p class="caption" data-i18n="step4">Locația se află la etajul 2, Ap.10.</p>
+                        <p class="caption" data-i18n="step5">Locația se află la etajul 2, Ap.10.</p>
                     </div>
                 </div>
                 <li data-i18n="checkin_leave">In ziua plecarii va rugam sa lasati cheile in cutia din care le-ati luat la check-in!</li>
@@ -540,7 +539,8 @@
       step1: 'Aceasta este intrarea principala.',
       step2: 'În această cutie veți gasi cheile de acces. Codul de deblocare îl veți primi în ziua sosirii.',
       step3: 'Pentru accesul în curte apropiați tag-ul albastru de la chei de zona marcată pe interfon.',
-      step4: 'După intrarea în curte, continuați pe culoar până la a doua intrare la dreapta. Locația este la etajul 2, Ap.10.',
+      step4: 'După intrarea în curte, continuați pe culoar până la a doua intrare la dreapta.',
+      step5: 'Locația se află la etajul 2, Ap.10.',
       checkin_leave: 'În ziua plecării vă rugăm să lăsați cheile în cutia din care le-ați luat la check-in!',
       rules_h2: '🛎️ Regulile casei',
       rule1: 'Fumatul este interzis în interior.',
@@ -576,7 +576,8 @@
       step1: 'This is the main entrance.',
       step2: 'You will find the keys in this box. The access code will be sent on the day of arrival.',
       step3: 'To access the courtyard, hold the blue key tag close to the marked intercom area.',
-      step4: 'After entering the courtyard, follow the corridor to the second doorway on the right. The apartment is on 2nd floor, Apt.10.',
+      step4: 'After entering the courtyard, follow the corridor to the second doorway on the right.',
+      step5: 'The location is on the 2nd floor, Ap.10.',
       checkin_leave: 'On departure day please leave the keys in the same box you used at check-in.',
       rules_h2: '🛎️ House rules',
       rule1: 'No smoking inside the property.',
